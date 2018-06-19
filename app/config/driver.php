@@ -7,14 +7,16 @@
 
 class Conexao extends PDO {
 
-	private $config = parse_ini_file('config.ini');
-	private $dsn = 'mysql:host='.$conig['db_host'].';port='.$config['db_port'].';dbname='.$config['db_name'].';charset='.$config['db_charset'];
+	private $user = null;
+	private $pass = null;
+	private $dsn = null;
 	public $handle = null;
 
 	function __construct() {
 		try {
 			if ( $this->handle == null ) {
-				$dbh = parent::__construct( $this->dsn , $this->config['db_user'] , $this->config['db_pass'] );
+				$this->loadConfig();
+				$dbh = parent::__construct( $this->dsn , $this->user , $this->pass );
 				$this->handle = $dbh;
 				return $this->handle;
 			}
@@ -26,5 +28,12 @@ class Conexao extends PDO {
 	}
 	function __destruct( ) {
 		$this->handle = NULL;
+	}
+
+	function loadConfig(){
+		$config = parse_ini_file('config.ini');
+		$this->dsn = 'mysql:host='.$conig['db_host'].';port='.$config['db_port'].';dbname='.$config['db_name'].';charset='.$config['db_charset'];
+		$this->user = $config['db_user'];
+		$this->pass = $config['db_pass'];
 	}
 }
