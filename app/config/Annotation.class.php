@@ -1,4 +1,10 @@
 <?php
+use Symfony\Component\Debug\Debug;
+use Symfony\Component\Debug\ErrorHandler;
+use Symfony\Component\Debug\ExceptionHandler;
+use Symfony\Component\Debug\DebugClassLoader;
+use Symfony\Component\Dotenv\Dotenv;
+
 class Annotation{
 
 	public function getPropertyAnnotations($myClass){
