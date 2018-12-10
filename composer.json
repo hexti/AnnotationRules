@@ -1,5 +1,5 @@
 {
-    "name": "andersonfreitas/AnnotationRules",
+    "name": "andersonfreitas/annotationrules",
     "description": "Library to read the annotations of a class to use it as validation of a request for php.",
     "keywords": ["annontation", "rules", "validate", "validation"],
     "homepage": "https://github.com/hexti/AnnotationRules",
