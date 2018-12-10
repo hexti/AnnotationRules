@@ -1,5 +1,21 @@
 {
+    "name": "andersonfreitas/AnnotationRules",
+    "description": "Library to read the annotations of a class to use it as validation of a request for php.",
+    "keywords": ["annontation", "rules", "validate", "validation"],
+    "homepage": "https://github.com/hexti/AnnotationRules",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Anderson Freitas",
+            "e-mail": "anderson.bask@gmail.com"
+        }
+    ],
+    "version" : "v1.0",
     "require": {
+        "php": ">=7.1.0"
+    },
+    "require-dev": {
         "symfony/filesystem" : "3.4.2",
         "symfony/var-dumper": "3.4.2",
         "symfony/debug": "3.4.2",
