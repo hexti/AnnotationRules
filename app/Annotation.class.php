@@ -29,7 +29,7 @@ class Annotation{
 		    $prop = new \ReflectionProperty($myClass, $prop->getName());
 			preg_match_all('#@ORM(.*?)\n#s', $prop->getDocComment(), $comments);
 			
-			if(!stristr($comments[0][2], 'IDENTITY')){
+			if((array_key_exists(2,$comments[0]) && !stristr($comments[0][2], 'IDENTITY')) || !array_key_exists(2,$comments[0])){
 				$search = array('Column', '(', ')', ';', '\\', '"');
 				$replace = array('', '', '', '', '', '');
 				$str = str_replace($search, $replace, (String)$comments[1][0]);
@@ -47,7 +47,7 @@ class Annotation{
 		$this->annotationArray = $comments_array;
 	}
 	
-	public function formatedToLaravel(){
+	private function formatedToLaravel(){
 		$search = array('type', 'length');
 		$replace = array('', 'max:');
 
@@ -84,9 +84,9 @@ class Annotation{
 		$this->annontationFormated = $array;
 	}
 
-	public function setRules($array){
-		foreach ($arra as $value) {
-			$this->annontationFormated .= "|".$value;
+	public function setRules(Array $array){
+		foreach ($array as $key => $value) {
+			$this->annontationFormated[$key] .= "|".$value;
 		}
 	}
 
