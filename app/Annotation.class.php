@@ -9,10 +9,11 @@ use Symfony\Component\Dotenv\Dotenv;
 
 class Annotation{
 
-	private $annotationArray = null;
-	private $annontationFormated = null;
+	private $annotationArray 			= null;
+	private $annontationFormated 		= null;
+	private $annontationFormatedForm 	= null;
 
-	public function __construct($myClass){
+	public function __construct($myClass, $formated=false){
 		self::learnPropertyAnnotations($myClass);
 		self::formatedToLaravel();
 	}
@@ -92,5 +93,70 @@ class Annotation{
 
 	public function getResult(){
 		return $this->annontationFormated;
+	}
+
+	public function getResultForm(){
+		foreach ($this->annotationArray as $key => $item) {
+
+			switch ($item['type']) {
+				case 'string':
+					$this->annontationFormatedForm[$key]['type'] = 'text';
+
+					if($item['name'] == 'password' || $item['name'] == 'senha'){
+						$this->annontationFormatedForm[$key]['type'] = 'password';
+					}
+
+					if($item['name'] == 'email' || $item['name'] == 'e-mail'){
+						$this->annontationFormatedForm[$key]['type'] = 'email';
+					}
+
+					if($item['name'] == 'arquivo' || $item['name'] == 'file'){
+						$this->annontationFormatedForm[$key]['type'] = 'file';
+					}
+
+					break;
+
+				case 'integer':
+					$this->annontationFormatedForm[$key]['type'] = 'number';
+					break;
+				
+				case 'date':
+					$this->annontationFormatedForm[$key]['type'] = 'date';
+					break;
+
+				case 'datetime':
+					$this->annontationFormatedForm[$key]['type'] = 'date';
+					break;
+
+				default:
+					# code...
+					break;
+			}
+			
+			$this->annontationFormatedForm[$key]['name'] = self::changeCamelcase($item['name'], '_');
+
+			//verifica se e required
+			$this->annontationFormatedForm[$key]['required'] = $item['nullable'] == false ? '' : 'required';
+
+			//verifica se tem tamanho maximo
+			!empty($item['length']) ? $this->annontationFormatedForm[$key]['max'] = $item['length'] : null;
+		}
+
+		return $this->annontationFormatedForm;
+	}
+
+	private function changeCamelcase($text, $delimiter) {
+		$newText = $text;
+		$explode = explode($delimiter, $text);
+
+		if(is_array($explode)){
+			$newText = array_shift($explode);
+
+			foreach ($explode as $item) {
+				$newText .= ucfirst($item);
+			}
+		}
+		
+		return $newText;
 	}
 }
