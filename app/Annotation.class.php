@@ -134,6 +134,7 @@ class Annotation{
 			}
 			
 			$this->annontationFormatedForm[$key]['name'] = self::changeCamelcase($item['name'], '_');
+			$this->annontationFormatedForm[$key]['label'] = self::changeLabel($item['name'], '_');
 
 			//verifica se e required
 			$this->annontationFormatedForm[$key]['required'] = $item['nullable'] == false ? '' : 'required';
@@ -155,6 +156,17 @@ class Annotation{
 			foreach ($explode as $item) {
 				$newText .= ucfirst($item);
 			}
+		}
+		
+		return $newText;
+	}
+
+	private function changeLabel($text, $delimiter) {
+		$newText = ucfirst($text);
+		$explode = explode($delimiter, $newText);
+
+		if(is_array($explode)){
+			$newText = implode(' ', $explode);
 		}
 		
 		return $newText;
