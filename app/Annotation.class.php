@@ -39,7 +39,9 @@ class Annotation{
 
 				for($i=0; $i<count($explode); $i++){
 					$ex = explode('=', $explode[$i]);
-					$comments_array[$count][trim($ex[0])] = trim($ex[1], " ");
+					if(count($ex) > 1){
+						$comments_array[$count][trim($ex[0])] = trim($ex[1], " ");
+					}
 				}
 				$count += 1;
 			}

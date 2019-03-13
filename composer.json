@@ -6,12 +6,9 @@
     "type": "library",
     "license": "MIT",
     "authors": [
-        {
-            "name": "Anderson Freitas",
-            "e-mail": "anderson.bask@gmail.com"
-        }
+        {"name": "Anderson Freitas", "e-mail": "anderson.bask@gmail.com"}
     ],
-    "version" : "v1.2",
+    "version" : "v1.3",
     "require": {
         "php": ">=7.1.0"
     },
