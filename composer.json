@@ -8,7 +8,7 @@
     "authors": [
         {"name": "Anderson Freitas", "e-mail": "anderson.bask@gmail.com"}
     ],
-    "version" : "v1.3",
+    "version" : "v1.4.1",
     "require": {
         "php": ">=7.1.0"
     },
